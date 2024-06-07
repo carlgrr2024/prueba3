@@ -1,0 +1,74 @@
+<html lang="es">
+<head>
+
+<title>Registrodb </title> 
+</head>
+<body>
+    
+</body> </html>
+
+<?php
+
+    $host = "localhost";
+    $user = "root";
+    $clave = "";
+    
+   $conexion = mysqli_connect($host,$user,$clave);
+
+    $usuario = $_POST["usuario"];
+    $nombre = $_POST["nombre"];
+    $clave = $_POST["clave"];
+    
+      $datab = "card";
+ 
+    $db = mysqli_select_db($conexion,$datab);
+
+    
+    $instruccion_SQL = "INSERT INTO usuarios (usuario, nombre, clave)
+                            VALUES ('$usuario','$nombre','$clave')";
+
+    $resultado = mysqli_query($conexion,$instruccion_SQL);
+
+    $consulta = "SELECT * FROM usuarios";
+
+    $result = mysqli_query($conexion,$consulta);
+
+    mysqli_close($conexion);
+    
+    ?>
+
+<html lang="es">
+<head>
+ 
+  <title>Formulario con Validacion</title>
+  <link rel="stylesheet" href="./style3.css">
+
+</head>
+<body>
+
+<div class="container">
+   <h1>Registro</h1>
+  <form id="miFormulario" onsubmit="alert('Registro exitoso');" method="post" action="#">
+    
+    <label for="numero">Usuario:</label>
+    <input type="text" id="usuario" name="usuario" required><br>
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" pattern="[A-Za-z\s]+" required><br>
+ 
+    <label for="clave">Password:</label>
+    <input type="text" id="clave" name="clave" ><br>
+
+    <input type="submit" value="Guardar">
+       
+    <a href="./index.php">Pagina Principal</a><br><br>
+    
+    <!--<input type="button" onclick="history.back()" name="volver atras" value="Regresar">-->
+
+    <a href="admin/index.php"> Iniciar sesion </a> 
+
+  </form>
+  </div>
+
+ </body>
+</html>
